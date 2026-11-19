@@ -1,5 +1,3 @@
-// Legacy code: written before Danger JS was added, so it has no tests yet.
-
 export type ShippingMethod = 'standard' | 'next-day' | 'click-and-collect'
 
 /** Shipping cost in pence for a basket total and method. */
