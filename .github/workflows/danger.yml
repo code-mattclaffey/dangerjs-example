@@ -1,0 +1,37 @@
+name: Danger JS
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+  statuses: write
+
+jobs:
+  danger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Run the tests with coverage. This writes coverage/coverage-final.json for Danger,
+      # and fails the job if coverage drops below the thresholds in jest.config.cjs.
+      - name: Unit tests with coverage
+        run: npm run test:coverage
+
+      # Always run Danger, so the PR still gets its comment when the tests or thresholds fail.
+      - name: Danger JS
+        if: always()
+        run: npx danger ci --failOnErrors
+        env:
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}

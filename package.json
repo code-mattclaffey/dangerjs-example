@@ -1,0 +1,20 @@
+{
+  "name": "dangerjs-example",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Raise test coverage in a legacy codebase with Danger JS: fail PRs that change a file without a test, show per-file coverage in the PR, and nudge the Jest thresholds up as coverage climbs.",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "danger:local": "danger local --base main"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "danger": "^14.1.0",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.5",
+    "typescript": "^5.9.3"
+  }
+}
