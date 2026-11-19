@@ -1,5 +1,3 @@
-// Legacy code: written before Danger JS was added, so it has no tests yet.
-
 export type DiscountCode = 'TENOFF' | 'FREESHIP' | 'HALFPRICE'
 
 export interface DiscountResult {
@@ -23,7 +21,8 @@ export function applyDiscount(total: number, code?: string): DiscountResult {
     case 'FREESHIP':
       return { total, freeShipping: true }
     case 'HALFPRICE':
-      return { total: total / 2, freeShipping: false }
+      // Round to whole pence
+      return { total: Math.round(total / 2), freeShipping: false }
     default:
       return { total, freeShipping: false }
   }
